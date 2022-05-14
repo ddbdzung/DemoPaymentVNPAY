@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8"> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= title %>
+  </title>
+  <link rel="stylesheet" href="/lib/tailwind.compressed.css">
+  <script src="/lib/jquery.compressed.js"></script>
+</head>
+
+<body>
+  <div class="max-w-2xl mx-auto bg-white p-16">
+    <h2 class="text-2xl font-bold tracking-wide">Tạo mới đơn hàng</h2>
+    <br>
+    <form id="form-submit" method="POST" action="/orders/create_payment_url">
+        <label for="orderType">Loại hàng hóa</label>
+        <select id="orderType" name="orderType" disabled class="form-select form-select-sm appearance-none block w-full px-2 py-1 text-sm font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label=".form-select-sm example">
+          <option selected value="fasion">Thời trang</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+        <input type="hidden" name="orderType" value="" id="hiddenOrderType">
+        <br>
+        <div>
+          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Số tiền</label>
+          <input type="text" id="amount" name="amount" value="<%= amount %>" disabled
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            required>
+            <input type="hidden" name="amount" value="" id="hiddenAmount">
+        </div>
+        <br>
+        <div>
+          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nội dung thanh toán</label>
+          <input type="text" id="orderDescription" name="orderDescription" value="<%= description %>"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            required>
+        </div>
+        <br>
+        <label for="bankCode">Ngân hàng</label>
+        <select id="bankCode" disabled class="form-select form-select-sm appearance-none block w-full px-2 py-1 text-sm font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label=".form-select-sm example">
+          <option selected value="NCB">Ngân hàng NCB</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+        <input type="hidden" name="bankCode" value="" id="hiddenBankCode">
+        <br>
+        <label for="language">Ngôn ngữ</label>
+        <select id="language" name="language" disabled class="form-select form-select-sm appearance-none block w-full px-2 py-1 text-sm font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label=".form-select-sm example">
+          <option selected value="vn">Tiếng Việt</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+        <input type="hidden" name="language" value="" id="hiddenLanguage">
+        <br>
+      <button type="button" id="submit-btn"
+        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Thanh toán</button>
+    </form>
+    <script>
+      var orderType = $('#orderType').find(':selected').val()
+      var bankCode = $('#bankCode').find(':selected').val()
+      var language = $('#language').find(':selected').val()
+      var amount = $('#amount').val()
+      $('#submit-btn').on('click', function(e) {
+        e.preventDefault()
+        $('#hiddenOrderType').val(orderType)
+        $('#hiddenBankCode').val(bankCode)
+        $('#hiddenLanguage').val(language)
+        $('#hiddenAmount').val(amount)
+        $('#form-submit').submit()
+      })
+    </script>
+  </div>
+
+</body>
+
+</html>
